@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+
+      <!-- convert doc to image  -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta1/html2canvas.min.js" integrity="sha512-2jFy0Eu53lpEQNN+XbC7hOJfxz9jJDX4tLLWeudXbvZHEVnN9jdxC1bjv5qvtyCgubD/zCJSVh1xI1C1UHgDqQ==" crossorigin="anonymous"></script>
+    <style>
+        /* body{
+            background-image: url('bg3.jpg');
+            max-width: 100%;
+            max-height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        } */
+        .text-box {
+            opacity: 0.7;
+            background-color: #4a4242;
+            border-radius: 10px;
+            width:100%;
+            border : 3px solid;
+          
+        }
+        .input-box{
+            background-color: #141111;
+            border: none;
+            color: white;
+            width: 90%;
+            height: 50px;
+            font-size: 25px;
+            text-align: center;       
+        }
+        .anker_ele{
+           text-decoration: none;
+           color: white;
+        }
+
+        .price-box{
+            width: 30%;
+            margin-top: 70px;
+            font-size: 20px;
+            opacity: 0.7;
+            background-color: #4a4242;
+            border-radius: 10px;
+            border : 3px solid
+        }
+        .icons{
+            z-index: 1;
+        }
+        .color{
+            width: 40px; 
+            height: 40px;
+            margin-left: 10px;
+        }
+        .special{
+            font-size: 22px;
+            padding-left: 10px;
+            padding-top: 2px;
+        }
+        .bg-box{
+            background-color:  #4a4242 ;
+            border-radius: 10px;
+            height: 280px;
+        }
+        
+       
+    </style>
+</head>
+<body>
+    <header></header>
+    <section class="container mt-5">
+        <div class="alert text-center text-box mx-auto" role="alert" id="text-box">
+            <h3 class="alert-heading text-white">Input Value</h3>
+            <hr class="text-white">
+            <p id="result" class="px-auto"></p>
+            <div class="m-4 input-box pt-1" id="mylist"></div>
+            <button type="button" class="btn btn-success" onclick="backward();"><i class="fas fa-step-backward"></i></button> 
+            <button type="button" class="btn btn-primary" onclick="deletedata();"><i class="fas fa-backspace"></i></button> 
+            <button type="button" class="btn btn-warning" onclick="swap();"><i class="fas fa-sync-alt"></i></button>
+            <button type="button" class="btn btn-danger" onclick="del();"> <i class="fa fa-trash"></i></button> 
+            <button type="button" class="btn btn-warning"  onclick="printdata();"><i class="fas fa-image"></i></button> 
+            <button type="button" class="btn btn-primary" onclick="reset();"><i class="fas fa-undo-alt"></i></button>
+            <button type="button" class="btn btn-success" onclick="forward();"><i class="fas fa-step-forward"></i></i></button>         
+        </div>
+       
+
+        <div class="alert text-center price-box mx-auto" role="alert" id="text-box">
+            <h4 class="alert-heading text-white">Price</h4>
+            <hr class="text-white">
+            <p class="m-2 input-box" id="price">0</p>
+        </div>
+    </section>
+
+    <section class="container mt-5">
+        <div class="pt-3">
+            <div class="row">
+               
+                <div class="col-md-4">
+                    <div class="col bg-box m-1 ">
+                        <h3 class="p-3 text-white" ><i class="fas fa-text"></i> Select Letter</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-toolbar mb-1" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group btn-group-md mb-3" role="group" aria-label="First group">
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#65;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#66;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#67;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#68;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#69;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#70;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#71;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#72;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#73;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-toolbar mb-1" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group btn-group-md mb-3" role="group" aria-label="First group">
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#74;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#75;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#76;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#77;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#78;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#79;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#80;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#81;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#82;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-toolbar mb-1" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group btn-group-md mb-3" role="group" aria-label="First group">
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#83;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#84;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#85;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#86;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#87;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#88;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#89;</button>
+                                        <button type="button" class="btn btn-primary m-1" onclick="data(this.innerHTML,'letter')">&#90;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                       
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col bg-box  m-1">
+                        <div class="pt-3">
+                            <h3 class="p-3 text-white">Select color</h3>
+                            <div class="btn-toolbar mb-1" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group btn-group-lg mb-3" role="group" aria-label="First group">
+                                    <div class="color" id = "#4a6597" style=" background-color:#4a6597;" onclick="data(this.id,this.className)"></div>
+                                    <div class="color" id = "#ff4000" style=" background-color:#ff4000;" onclick="data(this.id,this.className)"></div>
+                                    <div class="color" id = "#ffff00" style=" background-color:#ffff00;" onclick="data(this.id,this.className)"></div>
+                                    <div class="color" id = "#00ff40" style=" background-color: #00ff40;" onclick="data(this.id,this.className)"></div>
+                                    <div class="color" id = "#ff00ff" style=" background-color: #ff00ff;" onclick="data(this.id,this.className)"></div>
+                                    <div class="color" id = "#00ffff" style=" background-color:#00ffff;" onclick="data(this.id,this.className)"></div>
+                                    <div class="color" id = "#936c6c" style=" background-color: #936c6c;" onclick="data(this.id,this.className)"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col bg-box  m-1">
+                        <div class="pt-3">
+                            <h3 class="p-3 text-white">Select Special Character</h3>
+                            <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group btn-group-lg mb-3" role="group" aria-label="First group">
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#33;</div>
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#35;</div>
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#36;</div>
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#37;</div>
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#38;</div>
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#42;</div>
+                                    <div class="color btn-info special" onclick="data(this.innerHTML,'special')">&#64;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+      //  console.log("hyyyy");
+        var price = {
+            letter:1,
+            color:2,
+            special:3
+        }
+        var main = [];
+        var count = 0;
+        var flag = false;
+        function data(val,check){  
+            var node = document.createElement("a");
+            var textnode = document.createTextNode(val);
+            node.className = "anker_ele";
+            node.id = "diff" + count;
+            count = count+1;
+            node.setAttribute("onclick","selectvalue(this)");
+            node.appendChild(textnode);
+
+             if(check == 'letter')
+             {      
+                document.getElementById("mylist").appendChild(node) ;
+               // document.getElementById('input-box').innerHTML =  document.getElementById('input-box').innerHTML + val;
+                document.getElementById('price').innerHTML = parseInt( document.getElementById('price').innerHTML)+price.letter + "$"; 
+                main.push(val);
+                console.log(main);
+            }
+             else if(check == 'color')
+             {  
+                if(flag)
+                {
+                    console.log(true);
+                    document.getElementById('text-box').style.borderColor = val;
+                    var len = document.getElementById("mylist").getElementsByTagName('a').length;
+                    for(var i=0;i<len;i++)
+                    {
+                        document.getElementsByTagName('a')[i].style.color = val;
+                    }                  
+                    flag = true;
+                }else{
+                    console.log(false);
+                    document.getElementById('price').innerHTML = parseInt(document.getElementById('price').innerHTML)+price.color + "$";
+                        document.getElementById('text-box').style.borderColor = val;
+                        var len = document.getElementById("mylist").getElementsByTagName('a').length;
+                        for(var i=0;i<len;i++)
+                        {
+                            document.getElementsByTagName('a')[i].style.color = val;
+                        }   
+                    flag = true;
+                }
+               
+             }
+             else if(check == 'special')
+             {               
+                document.getElementById("mylist").appendChild(node);
+                document.getElementById('price').innerHTML = parseInt( document.getElementById('price').innerHTML)+price.special + "$";
+              //document.getElementById('input-box').innerHTML =  document.getElementById('input-box').innerHTML + val; 
+                main.push(val);
+                console.log(main);
+            }
+        }
+        
+        function deletedata(){
+            var regx = /[a-z A-Z]/
+            var len = document.getElementById("mylist").getElementsByTagName('a').length;
+            console.log(len);  
+            var last_ele = document.getElementById("mylist").getElementsByTagName('a')[len-1].innerHTML;
+            console.log(last_ele);
+            document.getElementById("mylist").getElementsByTagName('a')[len-1].remove(); 
+            if(regx.test(last_ele))
+            {
+                console.log(last_ele);
+                document.getElementById('price').innerHTML = parseInt( document.getElementById('price').innerHTML)-price.letter + "$";
+            }else
+            {
+                document.getElementById('price').innerHTML = parseInt( document.getElementById('price').innerHTML)-price.special + "$";
+            }    
+        }
+
+      
+        var arr = [];
+        var arrid = [];
+        var leftid="";
+        var ledt="";
+        var right = "";
+        var rightid = "";
+        var currentid = "";
+        var current = "";
+
+        function selectvalue(x){
+           // var z = x;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            arr.push(x.innerHTML);
+            arrid.push(x.id);
+            current = x.innerHTML;
+            currentid = x.id;
+            document.getElementById(currentid).style.color = "red"; 
+            leftid=x.previousSibling.id;
+            rightid = x.nextSibling.id;
+
+            left = x.previousSibling.innerHTML;
+            right = x.nextSibling.innerHTML;
+  
+            console.log(arr);     
+            console.log(arrid);     
+
+        }
+       
+       
+        function swap(){ 
+           
+            if(arr.length<=1)
+            {
+                 document.getElementById('result').innerHTML = "Please select two number";
+                 document.getElementById('result').style.color = 'red'; 
+            }else if(arr.length == 2)  
+            {
+                document.getElementById('result').innerHTML = "";
+                var y = arr.length-1;
+                var temp = arr[y]; 
+                arr[y] = arr[y-1];
+                arr[y-1]= temp;
+                document.getElementById(arrid[y-1]).innerHTML = arr[y];
+                document.getElementById(arrid[y]).innerHTML = arr[y-1];      
+            }
+            else{
+                document.getElementById('result').innerHTML = "Do not select more than two ";
+                document.getElementById('result').style.color = 'red'; 
+            }
+            
+        }
+        
+         function del()
+         {
+             var regx = /[a-z A-Z]/
+             var y = arr.length -1;
+             var cc= arr[arr.length -1];
+             arr.splice(y, 1);
+             document.getElementById(arrid[y]).innerHTML = "";  
+             arrid.splice(y, 1);
+             if(regx.test(cc))
+            {
+                console.log(cc);
+                document.getElementById('price').innerHTML = parseInt( document.getElementById('price').innerHTML)-price.letter + "$";
+            }else
+            {
+                document.getElementById('price').innerHTML = parseInt( document.getElementById('price').innerHTML)-price.special + "$";
+            }            
+         }
+
+         function forward(){
+            if(arr.length<1)
+            {
+                document.getElementById('result').innerHTML = "Select any number";
+                document.getElementById('result').style.color = 'red'; 
+            }else{
+                document.getElementById('result').innerHTML = "";
+                document.getElementById(currentid).style.color ="white";
+                document.getElementById(rightid).style.color = "red";
+                document.getElementById(currentid).innerHTML = right;  
+                document.getElementById(rightid).innerHTML = current;
+                currentid = rightid; 
+                selectvalue(document.getElementById(currentid));
+            }
+                     
+         }
+         function backward(){ 
+            document.getElementById(currentid).style.color ="white";
+            document.getElementById(leftid).style.color = "red";           
+            document.getElementById(currentid).innerHTML = left;  
+            document.getElementById(leftid).innerHTML = current;
+            currentid = leftid; 
+            selectvalue(document.getElementById(currentid));   
+         }
+
+         function reset(){
+             document.getElementById('mylist').innerHTML = "";
+             document.getElementById('result').innerHTML = " ";
+             var del = document.getElementById('price').innerHTML ;
+             console.log(del);
+             document.getElementById('price').innerHTML  = parseInt(document.getElementById('price').innerHTML) - parseInt(document.getElementById('price').innerHTML); 
+             main = [];
+             console.log(main);
+             arr = [];
+             arrid = [];    
+             console.log(arr);
+        
+         }
+         
+         function printdata(){
+            // var canvas = document.getElementById('text-box');
+            // console.log(canvas);
+            // var imgconverted = document.getElementById('mylist');
+            // console.log(imgconverted);
+
+            // const dataURI = canvas.toDataURL();
+            // console.log(dataURI);
+            // imgconverted.src = dataURI;
+             
+            // var img = document.createElement('img'); 
+            // img.src =  window.location.href;
+            // document.getElementById('body').appendChild(img); 
+            // var node = document.getElementById('text-box');
+
+            // domtoimage.toPng(node)
+            // .then (function (dataUrl) {
+            //     var img = new Image();
+            //     img.src = dataUrl;
+            //     document.appendChild(img);
+            // })
+            // .catch(function (error) {
+            //     console.error('oops, something went wrong!', error);
+            // });
+            // var divContents= document.getElementById('text-box').innerHTML;
+            // var textContents= document.getElementById('mylist').innerHTML;
+            // var a = window.open('', '', 'height=500, width=500'); 
+            // a.document.write('<html>'); 
+            // a.document.write('<body > <h1>Div contents are <br>'); 
+            // a.document.write(divContents); 
+            // a.document.write(textContents); 
+            // a.document.write('</body></html>'); 
+            // a.document.close(); 
+            // a.print(); 
+             //var container = document.getElementById("image-wrap"); //specific element on page
+             var container = document.getElementById("text-box"); // full page 
+             console.log(container);
+             html2canvas(container, { allowTaint: true }).then(function (canvas) {
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download = "html_image.jpg";
+                link.href = canvas.toDataURL();
+                link.target = '_blank';
+                link.click();
+            });
+         }
+      
+    </script>
+
+</body>
+</html>
